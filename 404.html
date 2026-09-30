@@ -3,7 +3,7 @@
 <script>
 (function () {
   var p = location.pathname;
-  if (/^\/(e|l|squadra\/r)\/[^/]+\/?$/.test(p)) {
+  if (/^\/(e|l|u|squadra\/r)\/[^/]+\/?$/.test(p)) {
     location.replace('https://play.google.com/store/apps/details?id=it.edufacile.cursus&referrer=' + encodeURIComponent(p.replace(/^\//, '')));
   }
 })();
