@@ -4,6 +4,10 @@
 (function () {
   var p = location.pathname;
   if (/^\/(e|l|u|squadra\/r)\/[^/]+\/?$/.test(p)) {
+    if ((/iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))) {
+      location.replace('/iphone/?da=' + encodeURIComponent(p.replace(/^\//, '')));
+      return;
+    }
     location.replace('https://play.google.com/store/apps/details?id=it.edufacile.cursus&referrer=' + encodeURIComponent(p.replace(/^\//, '')));
   }
 })();
@@ -17,5 +21,5 @@ h1{font-size:28px;line-height:1.2;margin:0 0 8px}h2{font-size:20px;margin:32px 0
 table{width:100%;border-collapse:collapse;margin:12px 0;font-size:15px;display:block;overflow-x:auto}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--linea);vertical-align:top}th{color:var(--ink)}
 nav{max-width:720px;margin:0 auto;padding:16px 22px 40px;font-size:15px}nav a{display:inline-block;margin:0 16px 8px 0}</style></head><body>
 <header><a href="/">Cursus</a><span>di EduFacile</span></header>
-<main><p>Questa pagina non c’è. Cursus si apre dall’app: <a href="https://play.google.com/store/apps/details?id=it.edufacile.cursus">Cursus sul Play Store</a>.</p></main>
+<main><p>Questa pagina non c’è. Cursus si apre dall’app: <a href="https://play.google.com/store/apps/details?id=it.edufacile.cursus">Cursus sul Play Store</a>. Su iPhone non c’è ancora: <a href="/iphone/">chi la aspetta può lasciare l’email</a>.</p></main>
 </body></html>
