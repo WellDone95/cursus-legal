@@ -9,70 +9,8 @@ h1{font-size:28px;line-height:1.2;margin:0 0 8px}h2{font-size:20px;margin:32px 0
 table{width:100%;border-collapse:collapse;margin:12px 0;font-size:15px;display:block;overflow-x:auto}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--linea);vertical-align:top}th{color:var(--ink)}
 nav{max-width:720px;margin:0 auto;padding:16px 22px 40px;font-size:15px}nav a{display:inline-block;margin:0 16px 8px 0}</style></head><body>
 <header><a href="/">Cursus</a><span>di EduFacile</span></header>
-<main><style>form{margin:20px 0 8px}label{display:block;font-weight:600;color:var(--ink);margin:14px 0 6px;font-size:15px}
-input[type=email]{width:100%;font:inherit;padding:12px 14px;border:1px solid var(--linea);border-radius:12px;background:var(--carta);color:var(--ink)}
-fieldset{border:0;padding:0;margin:14px 0 0}legend{font-weight:600;color:var(--ink);font-size:15px;padding:0;margin-bottom:6px}
-.scelta{display:flex;gap:10px;align-items:center;margin:6px 0;color:var(--ink2);font-weight:400;font-size:16px}
-button{margin-top:18px;width:100%;font:inherit;font-weight:700;padding:13px 16px;border:0;border-radius:12px;background:var(--verde);color:#fff;cursor:pointer}
-button[disabled]{opacity:.6}.riga{font-size:14px}.esito{margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--bg);color:var(--ink)}
-.esito.no{color:#B42318}.canale{margin-top:28px;padding-top:18px;border-top:1px solid var(--linea)}
-@media(prefers-color-scheme:dark){button{color:#0E1512}.esito.no{color:#F97066}}</style>
-<h1>Cursus su iPhone arriva</h1>
-<p>Cursus è la Piattaforma dei Professionisti del Movimento: l’app di EduFacile per docenti di educazione fisica e allenatori del settore giovanile: si disegnano gli esercizi, si preparano lezioni e allenamenti, si usano in palestra. Per ora c’è solo su Android; la versione per iPhone è in preparazione.</p>
-<p id="da" hidden>Il link aperto porta a un contenuto di Cursus: su iPhone si potrà vedere quando l’app sarà uscita.</p>
-<form id="modulo" novalidate>
-<label for="email">Email per l’avviso</label>
-<input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="nome@email.it" required>
-<fieldset><legend>Chi sei <span style="font-weight:400;color:var(--ink2)">(facoltativo)</span></legend>
-<label class="scelta"><input type="radio" name="ruolo" value="docente"> Insegno educazione fisica</label>
-<label class="scelta"><input type="radio" name="ruolo" value="allenatore"> Alleno nel settore giovanile</label>
-<label class="scelta"><input type="radio" name="ruolo" value="entrambi"> Tutte e due</label>
-</fieldset>
-<button id="invia" type="submit">Avvisami quando esce</button>
-<p class="riga">L’email serve solo a questo: un messaggio il giorno in cui Cursus esce su iPhone, nient’altro. Si cancella al più tardi dopo 12 mesi. <a href="/privacy/">Informativa sulla privacy</a></p>
-</form>
-<div id="esito" class="esito" role="status" hidden></div>
-<div class="canale"><p>Nel frattempo, le novità sull’educazione fisica a scuola arrivano sul canale WhatsApp di EduFacile <a href="https://whatsapp.com/channel/0029Vb6ocenLdQem4rcgqx3I">«Ed. Fisica nella Scuola»</a>.</p></div>
-<script>
-(function () {
-  var URL_DB = "https://pkkymgessstmkwdpqdmr.supabase.co", CHIAVE = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBra3ltZ2Vzc3N0bWt3ZHBxZG1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk1NDEwMjQsImV4cCI6MjEwNTExNzAyNH0.2Ex9WVaI13nIk-SNUce2ObuhgnYf0rQiqUIaUpYzP7g";
-  if (new URLSearchParams(location.search).get('da')) document.getElementById('da').hidden = false;
-  var modulo = document.getElementById('modulo'), esito = document.getElementById('esito'), invia = document.getElementById('invia');
-  function dici(t, no) { esito.textContent = t; esito.className = 'esito' + (no ? ' no' : ''); esito.hidden = false; }
-  function chiama(corpo) {
-    return fetch(URL_DB + '/rest/v1/rpc/iscrivi_lista', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', apikey: CHIAVE, Authorization: 'Bearer ' + CHIAVE },
-      body: JSON.stringify(corpo)
-    });
-  }
-  modulo.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var email = document.getElementById('email').value.trim().toLowerCase();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { dici('Questa email non sembra scritta bene. Ricontrollala.', true); return; }
-    var r = modulo.querySelector('input[name=ruolo]:checked');
-    invia.disabled = true;
-    chiama({ email: email, ruolo: r ? r.value : null, da_dove: 'sito_iphone' })
-      .then(function (risposta) { return risposta.status === 404 ? chiama({ email: email }) : risposta; })
-      .then(function (risposta) {
-        if (risposta.ok) {
-          modulo.hidden = true;
-          dici('Fatto. Il giorno in cui Cursus esce su iPhone arriva un’email a ' + email + '.');
-          return;
-        }
-        return risposta.text().then(function (t) {
-          invia.disabled = false;
-          if (/email_non_valida/.test(t)) dici('Questa email non sembra scritta bene. Ricontrollala.', true);
-          else if (/troppo_presto/.test(t)) dici('In questo momento arrivano troppe iscrizioni. Riprova fra un’ora.', true);
-          else dici('Non è stato possibile salvare l’email. Riprova fra poco, oppure scrivi a info@edufacile.it.', true);
-        });
-      })
-      .catch(function () {
-        invia.disabled = false;
-        dici('Non c’è connessione. Riprova quando torna la linea.', true);
-      });
-  });
-})();
-</script></main>
+<main><script>location.replace('https://apps.apple.com/it/app/id6818735235');</script>
+<h1>Cursus su iPhone</h1>
+<p>Cursus è sull’App Store: <a href="https://apps.apple.com/it/app/id6818735235">scaricala da qui</a>.</p></main>
 <nav><a href="/privacy/">Privacy</a><a href="/termini/">Termini d’uso</a><a href="/elimina-account/">Elimina account</a><a href="mailto:info@edufacile.it">info@edufacile.it</a></nav>
 </body></html>
