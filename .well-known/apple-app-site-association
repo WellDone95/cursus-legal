@@ -1,0 +1,25 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "R8X24VVLVM.it.edufacile.cursus"
+        ],
+        "components": [
+          {
+            "/": "/e/*"
+          },
+          {
+            "/": "/l/*"
+          },
+          {
+            "/": "/u/*"
+          },
+          {
+            "/": "/squadra/r/*"
+          }
+        ]
+      }
+    ]
+  }
+}
