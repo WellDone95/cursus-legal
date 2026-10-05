@@ -16,8 +16,8 @@ nav{max-width:720px;margin:0 auto;padding:16px 22px 40px;font-size:15px}nav a{di
     var v = q.get(k); if (v) utm.set(k, v.slice(0, 60));
   });
   if ((/iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))) {
-    var c = q.get('utm_campaign'), pt = '', u = 'https://apps.apple.com/it/app/id6818735235';
-    if (pt && c) u += '?pt=' + pt + '&ct=' + encodeURIComponent(('meta-' + c).slice(0, 40)) + '&mt=8';
+    var c = q.get('utm_campaign'), pt = '129554372', u = 'https://apps.apple.com/it/app/id6818735235';
+    if (pt && c) u = 'https://apps.apple.com/app/apple-store/id6818735235?pt=' + pt + '&ct=' + encodeURIComponent(('meta-' + c).slice(0, 30)) + '&mt=8';
     location.replace(u);
   } else if (/Android/.test(navigator.userAgent)) {
     location.replace('https://play.google.com/store/apps/details?id=it.edufacile.cursus' + (utm.toString() ? '&referrer=' + encodeURIComponent(utm.toString()) : ''));
