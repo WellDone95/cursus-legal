@@ -19,13 +19,27 @@ nav{max-width:720px;margin:0 auto;padding:16px 22px 40px;font-size:15px}nav a{di
     var c = q.get('utm_campaign'), pt = '129554372', u = 'https://apps.apple.com/it/app/id6818735235';
     if (pt && c) u = 'https://apps.apple.com/app/apple-store/id6818735235?pt=' + pt + '&ct=' + encodeURIComponent(('meta-' + c).slice(0, 30)) + '&mt=8';
     location.replace(u);
-  } else if (/Android/.test(navigator.userAgent)) {
+  } else if (/Android/.test(navigator.userAgent) && !true) {
     location.replace('https://play.google.com/store/apps/details?id=it.edufacile.cursus' + (utm.toString() ? '&referrer=' + encodeURIComponent(utm.toString()) : ''));
   }
 })();
 </script>
 <h1>Scarica Cursus</h1>
 <p>La Piattaforma dei Professionisti del Movimento: docenti di educazione fisica e allenatori del settore giovanile che si passano gli esercizi. Gratis, su iPhone e Android.</p>
-<p><a href="https://apps.apple.com/it/app/id6818735235">Cursus sull’App Store</a> · <a href="https://play.google.com/store/apps/details?id=it.edufacile.cursus">Cursus sul Play Store</a></p></main>
+<p><a href="https://apps.apple.com/it/app/id6818735235">Cursus sull’App Store</a> (iPhone e iPad)</p>
+<style>.passi{padding-left:0;list-style:none;counter-reset:p}.passi li{counter-increment:p;position:relative;padding:0 0 18px 44px}
+.passi li:before{content:counter(p);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--verde);color:#fff;font-weight:800;text-align:center;line-height:30px}
+.bottone{display:inline-block;margin-top:8px;padding:12px 18px;border-radius:12px;background:var(--verde);color:#fff;font-weight:700;text-decoration:none}
+@media(prefers-color-scheme:dark){.bottone{color:#0E1512}.passi li:before{color:#0E1512}}</style>
+<section id="android">
+<h2>Su Android: si entra nella prova</h2>
+<p>Su Android Cursus è nella prova che viene prima dell’uscita sul Play Store, e per qualche giorno il Play Store la mostra solo a chi si è iscritto. Ci vuole un minuto: tutto <strong>dal telefono</strong>, con <strong>lo stesso account Google del Play Store</strong>.</p>
+<ol class="passi">
+<li><strong>Entrare nel gruppo dei tester</strong>, toccando «Partecipa al gruppo».<br><a class="bottone" href="https://groups.google.com/g/cursus-tester">Apri il gruppo</a></li>
+<li><strong>Attivare la prova</strong>, toccando «Diventa un tester».<br><a class="bottone" href="https://play.google.com/apps/testing/it.edufacile.cursus">Diventa tester</a></li>
+<li><strong>Scaricare Cursus</strong> dal Play Store. Se dice che l’app non è disponibile, l’iscrizione non è ancora arrivata: qualche minuto e si riprova.<br><a class="bottone" href="https://play.google.com/store/apps/details?id=it.edufacile.cursus">Apri il Play Store</a></li>
+</ol>
+<p>Se qualcosa non va: <a href="mailto:info@edufacile.it">info@edufacile.it</a>.</p>
+</section></main>
 <nav><a href="/privacy/">Privacy</a><a href="/termini/">Termini d’uso</a><a href="/elimina-account/">Elimina account</a><a href="mailto:info@edufacile.it">info@edufacile.it</a></nav>
 </body></html>
